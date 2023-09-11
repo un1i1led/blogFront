@@ -1,3 +1,11 @@
+body {
+    margin: 0;
+}
+
+.App {
+    height: 99vh;
+}
+
 .nav-main {
     display: grid;
     grid-template-columns: 1fr 0.5fr 1fr;
@@ -31,4 +39,34 @@
 
 .nav-right button:last-of-type {
     margin-right: 10em;
+}
+
+.spotlight-main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.spotlight-main .left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.post-border > h2,
+.post-border > p {
+    margin: 0;
+}
+
+.spotlight-main .left .post-border {
+    display: flex;
+    flex-direction: column;
+    width: clamp(45ch, 50%, 75ch);
+    border: 1px solid blue;
+    border-radius: 1.5em;
+}
+
+.spt-img {
+    align-self: center;
+    width: 80%;
+    height: 10em;
 }
