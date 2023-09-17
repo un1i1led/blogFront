@@ -1,72 +1,62 @@
-body {
-    margin: 0;
+/* variables */
+
+:root {
+    --primary: #f4f4f4;
+    --secondary: #16193e;
 }
 
-.App {
-    height: 99vh;
+/* reset */
+
+body, p, a, ul, li {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
 }
+
+li {
+    list-style-type: none;
+}
+
+/* base styles */
+
+body {
+    background: var(--primary);
+    overflow-x: hidden;
+}
+
+/* mobile styles */
 
 .nav-main {
     display: grid;
-    grid-template-columns: 1fr 0.5fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
 }
 
-.logo {
-    padding: 10px 40px;
+.nav {
+    /* outline: 1px solid black; */
+    padding: 2em;
 }
 
-.nav-main div {
-    display: flex;
-}
-
-.nav-main > div:nth-of-type(2) {
-    justify-content: center;
-}
-
-.nav-right {
-    justify-content: flex-end;
-    align-items: center;
-    gap: 10px;
-}
-
-.nav-right button {
-    border-radius: 2em;
-    border: none;
-    cursor: pointer;
-    width: 100px;
-    height: 40px;
-}
-
-.nav-right button:last-of-type {
-    margin-right: 10em;
-}
-
-.spotlight-main {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-}
-
-.spotlight-main .left {
+.mid-block {
     display: flex;
     justify-content: center;
-    align-items: center;
+    outline: 1px solid black;
+    padding: 0.5em 4em;
+    border-radius: 0.7em;
 }
 
-.post-border > h2,
-.post-border > p {
-    margin: 0;
+/* small tablet styles */
+
+@media screen and (min-width: 620px) {
+
 }
 
-.spotlight-main .left .post-border {
-    display: flex;
-    flex-direction: column;
-    width: clamp(45ch, 50%, 75ch);
-    border: 1px solid blue;
-    border-radius: 1.5em;
+/* large tablets * laptop styles */
+
+@media screen and (min-width: 960px){
+
 }
 
-.spt-img {
-    align-self: center;
-    width: 80%;
-    height: 10em;
+/* desktop styles */
+@media screen and (min-width: 1200px){
+    
 }
