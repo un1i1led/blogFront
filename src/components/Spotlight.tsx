@@ -1,45 +1,51 @@
+import img1 from '../assets/breakfast.jpg';
+import img2 from '../assets/stars.jpg';
+import clockImg from '../assets/clock-ten-thirty-svgrepo-com.svg';
+
 const Spotlight = () => {
     const posts = [
         {
             id: 1,
-            title: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam tincidunt dui et est suscipit',
+            imgLink: img1,
+            title: 'Lorem ipsum dolor sit amet',
             body: 'posuere. Vivamus pulvinar augue tellus, nec imperdiet leo convallis at. Sed gravida feugiat orci a ultricies. In dapibus mauris et dolor congue volutpat. Cras non turpis sodales, sodales tortor sed, pharetra nisl. Sed tincidunt ipsum nec elit placerat, quis feugiat felis tincidunt. Suspendisse potenti.',
-            date: new Date(),
+            date: '1h ago',
+            tags: ['NFT', 'Technology'],
             published: true
         },
         {
             id: 2,
+            imgLink: img2,
             title: 'second post',
             body: 'dakidw kdawiko',
-            date: new Date(),
+            date: '1h ago',
+            tags: ['NFT', 'Technology'],
             published: true
         },
         {
             id: 3,
             title: 'third post',
             body: 'diqwd iwqdkid dwdw',
-            date: new Date(),
+            date: '2h ago',
+            tags: ['NFT', 'Technology'],
             published: true
         }
     ];
 
     return (
-        <div className='spotlight-main'>
-            <div className='left'>
-                <div className='post-border'>
-                    <div className='spt-img'></div>
-                    <h2>{posts[0].title}</h2>
-                    <p>{posts[0].body}</p>
-                </div>
+        <div className='spotlight'>
+            <div className='spotlight-main'>
+                <img src={posts[0].imgLink} alt=''/>
+                <span className='spotlight-text'><p>Trending</p></span>
             </div>
-            <div className='right'>
-                <div className='post-border'>
-                    <h2>{posts[1].title}</h2>
-                    <p>{posts[1].body}</p>
-                </div>
-                <div className='post-border'>
-                    <h2>{posts[2].title}</h2>
-                    <p>{posts[2].body}</p>
+            <div className='spotlight-info'>
+                <h1>{posts[0].title}</h1>
+                <div className='info-small'>
+                    <p>{posts[0].tags[0]}</p>
+                    <div className='small-date'>
+                        <img src={clockImg} alt=''/>
+                        <p>{posts[0].date}</p>
+                    </div>
                 </div>
             </div>
         </div>
