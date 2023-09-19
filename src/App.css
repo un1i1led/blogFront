@@ -11,6 +11,7 @@ body, p, a, ul, li {
     margin: 0;
     padding: 0;
     text-decoration: none;
+    font-family: 'Lato', sans-serif;
 }
 
 li {
@@ -24,30 +25,101 @@ body {
     overflow-x: hidden;
 }
 
+img {
+    cursor: pointer;
+}
+
 /* mobile styles */
 
 .nav-main {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 2fr 1fr;
 }
 
 .nav {
-    /* outline: 1px solid black; */
     padding: 2em;
 }
 
 .mid-block {
     display: flex;
     justify-content: center;
-    outline: 1px solid black;
-    padding: 0.5em 4em;
+    outline: 2px solid black;
+    padding: 0.5em 0em;
     border-radius: 0.7em;
+}
+
+.small-img {
+    height: 2em;
+    width: 2em;
+}
+
+.mid-img {
+    height: 2.5em;
+    width: 2.5em;
+}
+
+.nav-right div,
+.nav-left div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.spotlight-main {
+    padding: 0 2em;
+    position: relative;
+}
+
+.spotlight-main img {
+    max-width: 100%;
+    border-radius: 2em;
+}
+
+.spotlight-text {
+    left: 2.5em;
+    top: 1.5em;
+    position: absolute;
+    background-color: black;
+    border-radius: 2em;
+    padding: 0.6em 1em;
+}
+
+.spotlight-text p {
+    color: white;
+    font-size: small;
+}
+
+.spotlight-info {
+    padding: 0 2em;
+    display: flex;
+    flex-direction: column;
+}
+
+.spotlight-info h1 {
+    font-size: 1.5em;
+}
+
+.info-small {
+    color: #77767b;
+    display: flex;
+    justify-content: space-between;
+}
+
+.small-date {
+    display: flex;
+    align-items: center;
+}
+
+.small-date img {
+    height: 1em;
 }
 
 /* small tablet styles */
 
 @media screen and (min-width: 620px) {
-
+    body {
+        color: red;
+    }
 }
 
 /* large tablets * laptop styles */
@@ -58,5 +130,7 @@ body {
 
 /* desktop styles */
 @media screen and (min-width: 1200px){
-    
+    .spotlight-main img {
+        max-width: 50%;
+    }
 }
