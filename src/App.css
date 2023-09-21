@@ -2,7 +2,8 @@
 
 :root {
     --primary: #f4f4f4;
-    --secondary: #16193e;
+    --secondary: #111B31;
+    --third: #6e53F1;
 }
 
 /* reset */
@@ -27,6 +28,18 @@ body {
 
 img {
     cursor: pointer;
+}
+
+.no-click {
+    cursor: auto;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.snd-color {
+    color: var(--third);
 }
 
 /* mobile styles */
@@ -71,15 +84,15 @@ img {
 }
 
 .spotlight-main img {
-    max-width: 100%;
-    border-radius: 2em;
+    width: 100%;
+    border-radius: 1.5em;
 }
 
 .spotlight-text {
     left: 2.5em;
     top: 1.5em;
     position: absolute;
-    background-color: black;
+    background-color: var(--secondary);
     border-radius: 2em;
     padding: 0.6em 1em;
 }
@@ -105,6 +118,10 @@ img {
     justify-content: space-between;
 }
 
+.info-small a {
+    color: #77767b;
+}
+
 .small-date {
     display: flex;
     align-items: center;
@@ -112,6 +129,42 @@ img {
 
 .small-date img {
     height: 1em;
+}
+
+.feed {
+    padding: 2em;
+}
+
+.cat-top {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cat-top > p {
+    font-size: large;
+}
+
+.cat-list {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5em 0;
+}
+
+.cat-list li {
+    padding: 0.8em 1.5em;
+    border-radius: 1.5em;
+    cursor: pointer;
+    font-size: small;
+}
+
+.cat-selected {
+    color: white;
+    background-color: var(--secondary);
+}
+
+.cat-unselected {
+    background-color: #e0e0e0;
+    color: #77767b;
 }
 
 /* small tablet styles */
