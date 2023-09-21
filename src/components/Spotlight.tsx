@@ -41,9 +41,11 @@ const Spotlight = () => {
             <div className='spotlight-info'>
                 <h1>{posts[0].title}</h1>
                 <div className='info-small'>
-                    <p>{posts[0].tags[0]}</p>
+                    <a href='/'>
+                        <p>{posts[0].tags[0]}</p>
+                    </a>
                     <div className='small-date'>
-                        <img src={clockImg} alt=''/>
+                        <img className='no-click' src={clockImg} alt=''/>
                         <p>{posts[0].date}</p>
                     </div>
                 </div>
