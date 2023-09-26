@@ -1,16 +1,22 @@
 import { v4 as uuidv4 } from 'uuid';
 
-const CategoriesSlider = () => {
-    const categories = [
-        {name: 'NFT', selected: true},
-        {name: 'Web', selected: false},
-        {name: 'Technology', selected: false},
-        {name: 'AI', selected: false}
-    ];
+interface sliderDetails {
+    categories: Array<category>;
+    category: string;
+    changeCategory(name:string): void;
+}
+
+interface category {
+    id: string;
+    name: string;
+    name_lowered: string;
+}
+
+const CategoriesSlider = (props: sliderDetails) => {
 
     const popCats = () => {
-       const items = categories.map(data => 
-            <li key={uuidv4()} className={data.selected ? 'cat-selected' : 'cat-unselected'}>{data.name}</li>
+       const items = props.categories.map(data => 
+            <li key={uuidv4()} className={props.category == data.name ? 'cat-selected' : 'cat-unselected'} onClick={() => props.changeCategory(data.name_lowered)}>{data.name}</li>
         );
 
         return <ul className='cat-list'>{items}</ul>
