@@ -1,5 +1,7 @@
 import CategoriesSlider from "./CategoriesSlider";
+import clockImg from '../assets/clock-ten-thirty-svgrepo-com.svg';
 import { useState, useEffect } from 'react';
+import { formatDistance, parseISO } from 'date-fns';
 import { v4 as uuid } from 'uuid';
 
 interface Category {
@@ -22,6 +24,7 @@ const ArticleFeed = () => {
     const [category, setCategory] = useState<Category>({_id: '0', name: 'All', name_lowered: 'all'});
     const [firstLoad, setFirstLoad] = useState<boolean>(true);
     const [posts, setPosts] = useState<Post[]>([]);
+    const today = new Date();
 
     const changeCategory = (newCategory:Category) => {
         if (newCategory._id != category._id) {
@@ -91,8 +94,16 @@ const ArticleFeed = () => {
                 <div className='post-left'>
                     <p>{post.tags.name}</p>
                     <h2>{post.title}</h2>
+                    <div className='post-left-date'>
+                        <img src={clockImg} alt=''/>
+                        <p>
+                            {formatDistance(today, parseISO(post.date as unknown as string))} ago
+                        </p>
+                    </div>
                 </div>
-                <div className='post-right'></div>
+                <div className='post-right'>
+                    <div></div>
+                </div>
             </div>  
         );
 
