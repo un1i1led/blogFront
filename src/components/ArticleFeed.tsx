@@ -3,6 +3,7 @@ import clockImg from '../assets/clock-ten-thirty-svgrepo-com.svg';
 import { useState, useEffect } from 'react';
 import { formatDistance, parseISO } from 'date-fns';
 import { v4 as uuid } from 'uuid';
+import { Link } from 'react-router-dom';
 
 interface Category {
     _id: string;
@@ -11,7 +12,7 @@ interface Category {
 }
 
 interface Post {
-    id: string;
+    _id: string;
     title: string;
     body: string;
     date: Date;
@@ -90,21 +91,23 @@ const ArticleFeed = () => {
 
     const populateFeed = () => {
         const items = posts.map(post => 
-            <div className='feed-post' key={uuid()}>
-                <div className='post-left'>
-                    <p>{post.tags.name}</p>
-                    <h2>{post.title}</h2>
-                    <div className='post-left-date'>
-                        <img src={clockImg} alt=''/>
-                        <p>
-                            {formatDistance(today, parseISO(post.date as unknown as string))} ago
-                        </p>
+            <Link to={`/posts/${post._id}`} key={uuid()}>
+                <div className='feed-post' key={uuid()}>
+                    <div className='post-left'>
+                        <p>{post.tags.name}</p>
+                        <h2>{post.title}</h2>
+                        <div className='post-left-date'>
+                            <img src={clockImg} alt=''/>
+                            <p>
+                                {formatDistance(today, parseISO(post.date as unknown as string))} ago
+                            </p>
+                        </div>
+                    </div>
+                    <div className='post-right'>
+                        <div></div>
                     </div>
                 </div>
-                <div className='post-right'>
-                    <div></div>
-                </div>
-            </div>  
+            </Link>
         );
 
         return <div className='posts'>{items}</div>
