@@ -95,7 +95,7 @@ const ArticleFeed = () => {
                 <div className='feed-post' key={uuid()}>
                     <div className='post-left'>
                         <p>{post.tags.name}</p>
-                        <h2>{post.title}</h2>
+                        {post.title.split(' ').length > 4 ? <h2 className='smaller-title'>{post.title}</h2> : <h2>{post.title}</h2>}
                         <div className='post-left-date'>
                             <img src={clockImg} alt=''/>
                             <p>
