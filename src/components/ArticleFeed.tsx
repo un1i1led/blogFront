@@ -1,7 +1,7 @@
 import CategoriesSlider from "./CategoriesSlider";
 import clockImg from '../assets/clock-ten-thirty-svgrepo-com.svg';
 import { useState, useEffect } from 'react';
-import { formatDistance, parseISO } from 'date-fns';
+import { formatDistance, parseISO, isThisWeek, format, isThisYear } from 'date-fns';
 import { v4 as uuid } from 'uuid';
 import { Link } from 'react-router-dom';
 
@@ -89,6 +89,18 @@ const ArticleFeed = () => {
         }
     }, [category])
 
+    const getDate = (date: string) => {
+        const postDate = parseISO(date);
+
+        if (isThisWeek(postDate)) {
+            return `${formatDistance(today, postDate)} ago`;
+        } else if (!isThisYear(postDate)) {
+            return `${format(postDate, 'MM/dd/yyyy')}`;
+        } else {
+            return `${format(postDate, 'MMM dd')}`;
+        }
+    }
+
     const populateFeed = () => {
         const items = posts.map(post => 
             <Link to={`/posts/${post._id}`} key={uuid()}>
@@ -99,7 +111,7 @@ const ArticleFeed = () => {
                         <div className='post-left-date'>
                             <img src={clockImg} alt=''/>
                             <p>
-                                {formatDistance(today, parseISO(post.date as unknown as string))} ago
+                                {getDate(post.date as unknown as string)}
                             </p>
                         </div>
                     </div>
