@@ -243,6 +243,105 @@ img {
     font-size: 1.05em;
 }
 
+.comments {
+    display: flex;
+    flex-direction: column;
+}
+
+.comment-btn {
+    border: 1px solid var(--secondary);
+    margin: 2em 0 3em 0;
+    padding: 1em;
+    cursor: pointer;
+    background-color: var(--primary);
+}
+
+/* Comments */
+
+.comment-main {
+    margin: 1em 0;
+    display: flex;
+    gap: 15px;
+}
+
+.comment-left {
+    display: flex;
+    align-items: center;
+}
+
+.comment-img {
+    height: 32px;
+    width: 32px;
+    border-radius: 2em;
+    background-color: var(--secondary);
+}
+
+.comment-right-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.comment-right-top h4 {
+    font-size: 1.05em;
+    margin: 0;
+}
+
+.dot {
+    font-size: 0.5em;
+}
+
+/* Signup */
+
+.red {
+    color: red;
+}
+
+.signup-main {
+    display: flex;
+    flex-direction: column;
+}
+
+.signup-form {
+    display: flex;
+    flex-direction: column;
+    margin: 3em 3em 1em 3em;
+}
+
+.signup-main h1 {
+    font-size: 1.5em;
+    align-self: center
+}
+
+.signup-form label {
+    margin: 0.5em 0;
+}
+
+.signup-form input {
+    height: 2em;
+}
+
+.signup-form button {
+    width: 100px;
+    height: 50px;
+    margin-top: 3em;
+    background-color: var(--third);
+    color: white;
+    border: none;
+    border-radius: 1em;
+
+}
+
+.signup-main a {
+    margin: 0 3em;
+    color: black;
+    padding-bottom: 3em;
+}
+
+.third {
+    color: var(--third);
+}
+
 /* small tablet styles */
 
 @media screen and (min-width: 620px) {
