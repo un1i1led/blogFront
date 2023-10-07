@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { v4 as uuid } from 'uuid';
 import { formatDistance, parseISO, isThisWeek, format, isThisYear } from 'date-fns';
 import Comment from '../components/Comment';
 
@@ -91,7 +92,7 @@ const ArticleDetail = () => {
             </div>
             <div className='comments'>
                 <h3>Comments</h3>
-                {comments.map((data) => <Comment comment={data} getDate={getDate}/>)}
+                {comments.map((data) => <Comment comment={data} getDate={getDate} key={uuid()}/>)}
                 <button className='comment-btn' onClick={changeCommentPage}>Load more comments</button>
             </div>
         </div>
