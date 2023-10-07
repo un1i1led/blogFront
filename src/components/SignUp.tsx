@@ -1,4 +1,13 @@
 import { useState } from 'react';
+import { v4 as uuid } from 'uuid';
+
+interface Error {
+    location: string;
+    msg: string;
+    path: string;
+    type: string;
+    value: string;
+}
 
 const SignUp = () => {
     const [password, setPassword] = useState<string>('');
@@ -6,8 +15,7 @@ const SignUp = () => {
     const [email, setEmail] = useState<string>('');
     const [username, setUsername] = useState<string>('');
     const [name, setName] = useState<string>('');
-    const [error, setError] = useState<string>('');
-    const [isValid, setIsValid] = useState<boolean>(false);
+    const [errors, setErrors] = useState<Error[]>([]);
 
     const postUser = () => {
         const formData = { name, username, email, password, confirm };
@@ -18,7 +26,15 @@ const SignUp = () => {
             body: JSON.stringify(formData)
         })
             .then((res) => res.json())
-            .then((res) => console.log(res))
+            .then((res) => {
+                if (res.errors) {
+                    const arr: Error[] = [];
+                    res.errors.map((data:Error) => arr.push(data))
+                    setErrors([...arr]);
+                } else {
+                    console.log(res.data);
+                }
+            })
     }
 
     return (
@@ -36,7 +52,7 @@ const SignUp = () => {
                 <label htmlFor='confirm'>Password Confirmation <span className='red'>*</span></label>
                 <input type='password' name='confirm' id='confirm-signup' required onChange={(e) => setConfirm(e.target.value)}/>
                 <button type='button' onClick={postUser}>Sign up</button>
-                {error !== '' ? <p className='red'>{error}</p> : ''}
+                {errors.length > 0 ? errors.map((data) => <p className='red' key={uuid()}>{data.msg}</p>) : ''}
             </form>
             <a href='/login'>Already have an account? <span className='third'>Log in</span></a>
         </div>
