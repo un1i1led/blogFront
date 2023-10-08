@@ -302,7 +302,12 @@ img {
     flex-direction: column;
 }
 
-.signup-form {
+.centered {
+    color: green;
+}
+
+.signup-form,
+.login-form {
     display: flex;
     flex-direction: column;
     margin: 3em 3em 1em 3em;
@@ -313,15 +318,18 @@ img {
     align-self: center
 }
 
-.signup-form label {
+.signup-form label,
+.login-form label {
     margin: 0.5em 0;
 }
 
-.signup-form input {
+.signup-form input,
+.login-form input {
     height: 2em;
 }
 
-.signup-form button {
+.signup-form button,
+.login-form button {
     width: 100px;
     height: 50px;
     margin-top: 3em;
@@ -340,6 +348,25 @@ img {
 
 .third {
     color: var(--third);
+}
+
+/* login form */
+
+.login-main {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-main h2 {
+    align-self: center;
+}
+
+.login-form .red {
+    margin-top: 1em;
+}
+
+.login-form button {
+    margin-top: 2em;
 }
 
 /* small tablet styles */
