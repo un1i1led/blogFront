@@ -44,6 +44,7 @@ const Login = () => {
                 } else {
                     setErrors('');
                     localStorage.setItem('userToken', res.token);
+                    navigate('/');
                 }
             })
     }
