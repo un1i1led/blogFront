@@ -47,20 +47,31 @@ img {
 
 .nav-main {
     display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
 }
 
 .nav {
-    padding: 2em;
+    padding: 2em 0;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-mid {
+    justify-self: center;
 }
 
 .mid-block {
     display: flex;
     justify-content: center;
     outline: 2px solid black;
-    padding: 0.5em 0em;
+    padding: 0.8em 2em;
     border-radius: 0.7em;
-    color: black;
+    color: white;
+    background-color: black;
 }
 
 .small-img {
@@ -73,12 +84,28 @@ img {
     width: 2.5em;
 }
 
+.nav-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .nav-right div,
 .nav-left div {
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
+.nav-login-btn {
+    padding: 1em;
+    border: 1px solid var(--third);
+    border-radius: 0.2em;
+    background-color: var(--primary);
+    color: var(--third);
+}
+
+/* spotlight */
 
 .spotlight-main {
     padding: 0 2em;
