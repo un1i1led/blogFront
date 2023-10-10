@@ -6,6 +6,7 @@ import Nav from './components/Nav';
 import ArticleDetail from './components/ArticleDetail';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
+import PostEditor from './components/PostEditor';
 
 function App() {
   const [hasToken, setHasToken] = useState(false);
@@ -23,6 +24,7 @@ function App() {
           <Route path='/posts/:postid' element={<ArticleDetail changeToken={changeToken}/>}/>
           <Route path='/login' element={<Login/>}/>
           <Route path='/signup' element={<SignUp/>}/>
+          <Route path='/new' element={<PostEditor/>}/>
         </Routes>
       </div>
     </Router>
