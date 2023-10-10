@@ -20,7 +20,7 @@ function App() {
         <Nav hasToken={hasToken}/>
         <Routes>
           <Route path='/' element={<Home changeToken={changeToken}/>}/>
-          <Route path='/posts/:postid' element={<ArticleDetail/>}/>
+          <Route path='/posts/:postid' element={<ArticleDetail changeToken={changeToken}/>}/>
           <Route path='/login' element={<Login/>}/>
           <Route path='/signup' element={<SignUp/>}/>
         </Routes>
