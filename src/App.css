@@ -20,6 +20,10 @@ li {
     list-style-type: none;
 }
 
+textarea {
+    resize: none;
+}
+
 /* base styles */
 
 body {
@@ -285,6 +289,19 @@ img {
 
 /* Comments */
 
+.make-comment {
+    display: flex;
+    gap: 15px;
+}
+
+.make-comment .comment-img {
+    width: 40px;
+}
+
+.img-div {
+    padding: 1em;
+}
+
 .comment-main {
     margin: 1em 0;
     display: flex;
@@ -356,7 +373,8 @@ img {
 }
 
 .signup-form button,
-.login-form button {
+.login-form button,
+.add-comment-btn {
     width: 100px;
     height: 50px;
     margin-top: 3em;
@@ -394,6 +412,16 @@ img {
 
 .login-form button {
     margin-top: 2em;
+}
+
+.add-comment-btn {
+    margin-top: 0.5em;
+    height: 40px;
+    width: 70px;
+}
+
+.add-comment-btn:disabled {
+    background-color: #6d53f17a;
 }
 
 /* small tablet styles */
