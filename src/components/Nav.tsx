@@ -1,12 +1,14 @@
 import notifImg from '../assets/notification-14-svgrepo-com.svg';
 import hamburger from '../assets/hamburger-svgrepo-com.svg';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 interface NavDetails {
     hasToken: boolean;
 }
 
 const Nav = (props: NavDetails) => {
+    const location = useLocation();
+
     const popWhenToken = () => {
         return (
             <div className='nav-main'>
@@ -58,10 +60,22 @@ const Nav = (props: NavDetails) => {
         )
     }
 
+    const nullOrNot = () => {
+        if (location.pathname === '/new') {
+            return null;
+        } else {
+            return (
+                <div className='nav-empty'>
+                    {props.hasToken == true ? popWhenToken() : popWhenNoToken()}
+                </div>
+            )
+        }
+    }
+
     return (
-        <div className='nav-empty'>
-            {props.hasToken == true ? popWhenToken() : popWhenNoToken()}
-        </div>
+        <>
+            {nullOrNot()}
+        </>
     )
 }
 
