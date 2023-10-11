@@ -421,7 +421,8 @@ img {
     width: 70px;
 }
 
-.add-comment-btn:disabled {
+.add-comment-btn:disabled,
+.publish-btn:disabled {
     background-color: #6d53f17a;
 }
 
@@ -487,7 +488,6 @@ img {
 
 .post-editor textarea {
     border: none;
-    width: 99%;
     font-size: 1.2em;
     padding: 1em;
 }
