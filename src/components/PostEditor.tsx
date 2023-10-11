@@ -1,8 +1,40 @@
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 const PostEditor = () => {
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const checkForUser = async () => {
+            await fetch('http://localhost:3000/login', {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('userToken')}`,
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then((res) => res.json())
+            .then((res) => {
+                if (res.msg == 'token invalid') {
+                    localStorage.removeItem('userToken');
+                    navigate('/login');
+                } else if (res.msg == 'authorized') {
+                    navigate('/login');
+                }
+            })
+        }
+
+        checkForUser();
+    }, [])
+
+    const closeEditor = () => {
+        navigate('/');
+    }
+
     return (
         <div className='post-editor'>
             <div className='editor-topbar'>
-                <button>X</button>
+                <button onClick={closeEditor}>X</button>
             </div>
             <div className='editor-mid'>
                 <div>
