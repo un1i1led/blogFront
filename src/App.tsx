@@ -7,6 +7,8 @@ import ArticleDetail from './components/ArticleDetail';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
 import PostEditor from './components/PostEditor';
+import AllCategories from './components/AllCategories';
+import CategoryDetail from './components/CategoryDetail';
 
 function App() {
   const [hasToken, setHasToken] = useState(false);
@@ -25,6 +27,8 @@ function App() {
           <Route path='/login' element={<Login/>}/>
           <Route path='/signup' element={<SignUp/>}/>
           <Route path='/new' element={<PostEditor/>}/>
+          <Route path='/allcategories' element={<AllCategories/>}/>
+          <Route path='/category/:categoryid' element={<CategoryDetail/>}/>
         </Routes>
       </div>
     </Router>
