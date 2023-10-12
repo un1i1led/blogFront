@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -58,6 +59,7 @@ const Login = () => {
                 <label htmlFor='password-login'>Password</label>
                 <input type='password' name='password' id='password-login' onChange={(e) => setPassword(e.target.value)}/>
                 {errors.length > 0 ? <p className='red'>{errors}</p> : ''}
+                <p className='m-top'>Dont have an account yet? <span><Link to={'/signup'}>Sign up</Link></span></p>
                 <button type='button' onClick={login}>Log in</button>
             </form>
         </div>
