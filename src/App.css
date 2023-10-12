@@ -534,6 +534,27 @@ img {
     color: white;
 }
 
+/* Allcategories */
+
+.all-cat-main ul {
+    margin: 0.5em 2em;
+    display: flex;
+    gap: 15px;
+}
+
+.cat-item {
+    padding: 0.8em 1.5em;
+    background-color: #b6b6b6;
+    color: white;
+    border-radius: 1.5em;
+}
+
+/* Category Detail */
+
+.category-detail {
+    margin: 1em 3em;
+}
+
 /* small tablet styles */
 
 @media screen and (min-width: 620px) {
