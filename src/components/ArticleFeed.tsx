@@ -26,11 +26,42 @@ const ArticleFeed = () => {
     const [firstLoad, setFirstLoad] = useState<boolean>(true);
     const [posts, setPosts] = useState<Post[]>([]);
     const today = new Date();
+    const [postPage, setPostPage] = useState(1);
 
     const changeCategory = (newCategory:Category) => {
+        setPostPage(1);
         if (newCategory._id != category._id) {
             setCategory(newCategory);
         }
+    }
+
+    const changePostPage = () => {
+        setPostPage(postPage + 1);
+    }
+
+    const fetchNewPosts = async (effect: string) => {
+        const newPosts: Post[] = [];
+
+        if (category._id == '0') {
+            await fetch(`http://localhost:3000/posts?page=${postPage}&limit=3`)
+                .then((res) => res.json())
+                .then((res) => {
+                    res.results.map((data: Post) => newPosts.push(data));
+                })
+        } else {
+            await fetch(`http://localhost:3000/posts/fromtag/${category.name_lowered}?page=${postPage}&limit=3`)
+                .then((res) => res.json())
+                .then((res) => {
+                    res.results.map((data: Post) => newPosts.push(data));
+                })
+        }
+
+        if (effect == 'postPage') {
+            setPosts([...posts, ...newPosts]);
+        } else {
+            setPosts([...newPosts]);
+        }
+
     }
 
     useEffect(() => {
@@ -49,10 +80,10 @@ const ArticleFeed = () => {
         async function fetchAllPosts() {
             const newPosts: Post[] = []
 
-            await fetch('http://localhost:3000/posts')
+            await fetch(`http://localhost:3000/posts?page=${postPage}&limit=3`)
                 .then(res => res.json())
                 .then(res => {
-                    res.posts.map((data: Post) => newPosts.push(data));
+                    res.results.map((data: Post) => newPosts.push(data));
                 })
             
             setPosts([...newPosts]);
@@ -68,26 +99,16 @@ const ArticleFeed = () => {
     }, []);
 
     useEffect(() => {
-        async function fetchNewPosts() {
-            const newPosts: Post[] = []
-
-            const url = `http://localhost:3000/posts/fromtag/${category.name_lowered}`;
-            const allUrl = 'http://localhost:3000/posts';
-
-            await fetch(category._id == '0' ? allUrl : url)
-                .then(res => res.json())
-                .then(res => {
-                    res.posts.map((data: Post) => newPosts.push(data));
-                })
-                
-            
-            setPosts([...newPosts]);
-        }
-
         if (firstLoad == false) {
-            fetchNewPosts();
+            fetchNewPosts('category');
         }
     }, [category])
+
+    useEffect(() => {
+        if (firstLoad == false) {
+            fetchNewPosts('postPage');
+        }
+    }, [postPage])
 
     const getDate = (date: string) => {
         const postDate = parseISO(date);
@@ -129,6 +150,7 @@ const ArticleFeed = () => {
         <div className='feed'>
             <CategoriesSlider categories={categories} category={category} changeCategory={changeCategory}/>
             {populateFeed()}
+            <div className='center-items'><button className='comment-btn' onClick={changePostPage}>Load more posts</button></div>
         </div>
     )
 }
