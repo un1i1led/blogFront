@@ -48,6 +48,12 @@ img {
     color: var(--third);
 }
 
+.center-items {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
 /* mobile styles */
 
 .nav-main {
