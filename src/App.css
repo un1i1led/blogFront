@@ -276,9 +276,22 @@ img {
     background-color: var(--secondary);
 }
 
+.article-info {
+    display: flex;
+    gap: 5px;
+}
+
+.image .info-small {
+    margin-top: 0.5em;
+}
+
 .post-body {
-    padding: 1em 0.5em;
+    padding: 1em 0;
     font-size: 1.05em;
+}
+
+.post-body p {
+    font-size: 0.9em;
 }
 
 .comments {
