@@ -36,12 +36,19 @@ interface CommentType {
     date: Date;
 }
 
+interface Author {
+    _id: string;
+    name: string;
+    username: string;
+}
+
 const ArticleDetail = (props: ArticleDetailProps) => {
     const [post, setPost] = useState<Post>();
     const [commentPage, setCommentPage] = useState(1);
     const [comments, setComments] = useState<CommentType[]>([]);
     const [activeUser, setActiveUser] = useState(false);
     const [username, setUsername] = useState('');
+    const [author, setAuthor] = useState<Author>(null);
     const today = new Date();
 
     const postId = window.location.pathname.split('/')[2];
@@ -64,7 +71,8 @@ const ArticleDetail = (props: ArticleDetailProps) => {
                     }
 
                     if (setPost.length <= 1) {
-                        setPost(res.post)
+                        setPost(res.post);
+                        setAuthor(res.post.user);
                     }
                 })
         }
@@ -115,6 +123,10 @@ const ArticleDetail = (props: ArticleDetailProps) => {
             </div>
             <div className='image'>
                 <div className='img-placeholder'></div>
+                <div className='article-info'>
+                    <p className='info-small'>by {author?.name}</p>
+                    <p className='info-small'>• {post?.tags.name}</p>
+                </div>
             </div>
             <div className='post-body'>
                 <p>{post?.body}</p>
