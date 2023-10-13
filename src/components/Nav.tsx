@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 
 interface NavDetails {
     hasToken: boolean;
+    controlSidebar: () => void;
 }
 
 const Nav = (props: NavDetails) => {
@@ -14,7 +15,7 @@ const Nav = (props: NavDetails) => {
             <div className='nav-main'>
                 <div className='nav nav-left'>
                     <div>
-                        <img className='small-img' src={hamburger} alt=''/>
+                        <img className='small-img' src={hamburger} alt='' onClick={props.controlSidebar}/>
                     </div>
                 </div>
                 <div className='nav nav-mid'>
@@ -39,7 +40,7 @@ const Nav = (props: NavDetails) => {
             <div className='nav-main'>
                 <div className='nav nav-left'>
                     <div>
-                        <img className='small-img' src={hamburger} alt=''/>
+                        <img className='small-img' src={hamburger} alt='' onClick={props.controlSidebar}/>
                     </div>
                 </div>
                 <div className='nav nav-mid'>
