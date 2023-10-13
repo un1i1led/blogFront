@@ -70,6 +70,15 @@ img {
     z-index: -1;
 }
 
+.sdbar-p a{
+    color: white;
+}
+
+.sidebar ul a {
+    color: black;
+    text-decoration: none;
+}
+
 .covering {
     display: block;
     height: 100%;
@@ -605,8 +614,14 @@ img {
 
 .all-cat-main ul {
     margin: 0.5em 2em;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 15px;
+}
+
+.all-cat-main ul li {
+    display: flex;
+    justify-content: center;
 }
 
 .cat-item {
