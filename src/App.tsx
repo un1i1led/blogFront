@@ -9,18 +9,24 @@ import SignUp from './components/SignUp';
 import PostEditor from './components/PostEditor';
 import AllCategories from './components/AllCategories';
 import CategoryDetail from './components/CategoryDetail';
+import Sidebar from './components/Sidebar';
 
 function App() {
   const [hasToken, setHasToken] = useState(false);
+  const [showSidebar, setShowSidebar] = useState(false);
 
   const changeToken = (value: boolean) => {
     setHasToken(value);
   }
 
+  const controlSidebar = () => {
+    showSidebar == false ? setShowSidebar(true) : setShowSidebar(false);
+  }
+
   return (
     <Router>
       <div className='App'>
-        <Nav hasToken={hasToken}/>
+        <Nav hasToken={hasToken} controlSidebar={controlSidebar}/>
         <Routes>
           <Route path='/' element={<Home changeToken={changeToken}/>}/>
           <Route path='/posts/:postid' element={<ArticleDetail changeToken={changeToken}/>}/>
@@ -31,6 +37,8 @@ function App() {
           <Route path='/category/:categoryid' element={<CategoryDetail/>}/>
         </Routes>
       </div>
+      <Sidebar showSidebar={showSidebar} hasToken={hasToken} controlSidebar={controlSidebar}/>
+      <div className={showSidebar == true ? 'cover covering' : 'cover'}></div>
     </Router>
   )
 }
