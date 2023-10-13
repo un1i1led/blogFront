@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
+import { Link } from 'react-router-dom';
 
 interface sliderDetails {
     categories: Array<Category>;
@@ -26,9 +27,9 @@ const CategoriesSlider = (props: sliderDetails) => {
         <div className='categories'>
             <div className='cat-top'>
                 <p className='bold'>Categories</p>
-                <a href=''>
+                <Link to={'/allcategories'}>
                     <p className='snd-color'>View more</p>
-                </a>
+                </Link>
             </div>
             <div className='cat-bot'>
                 {popCats()}
