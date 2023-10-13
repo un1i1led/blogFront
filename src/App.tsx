@@ -37,7 +37,7 @@ function App() {
           <Route path='/category/:categoryid' element={<CategoryDetail/>}/>
         </Routes>
       </div>
-      <Sidebar showSidebar={showSidebar} hasToken={hasToken} controlSidebar={controlSidebar}/>
+      <Sidebar showSidebar={showSidebar} hasToken={hasToken} controlSidebar={controlSidebar} changeToken={changeToken}/>
       <div className={showSidebar == true ? 'cover covering' : 'cover'}></div>
     </Router>
   )
