@@ -29,7 +29,6 @@ const Home = (props: HomeProps) => {
         }
     
         checkToken();
-        console.log('app useEffect');
     
     }, [])
 
