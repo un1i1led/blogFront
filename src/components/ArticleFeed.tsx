@@ -1,9 +1,7 @@
 import CategoriesSlider from "./CategoriesSlider";
-import clockImg from '../assets/clock-ten-thirty-svgrepo-com.svg';
 import { useState, useEffect } from 'react';
-import { formatDistance, parseISO, isThisWeek, format, isThisYear } from 'date-fns';
 import { v4 as uuid } from 'uuid';
-import { Link } from 'react-router-dom';
+import PostItem from "./PostItem";
 
 interface Category {
     _id: string;
@@ -25,7 +23,6 @@ const ArticleFeed = () => {
     const [category, setCategory] = useState<Category>({_id: '0', name: 'All', name_lowered: 'all'});
     const [firstLoad, setFirstLoad] = useState<boolean>(true);
     const [posts, setPosts] = useState<Post[]>([]);
-    const today = new Date();
     const [postPage, setPostPage] = useState(1);
 
     const changeCategory = (newCategory:Category) => {
@@ -110,37 +107,9 @@ const ArticleFeed = () => {
         }
     }, [postPage])
 
-    const getDate = (date: string) => {
-        const postDate = parseISO(date);
-
-        if (isThisWeek(postDate)) {
-            return `${formatDistance(today, postDate)} ago`;
-        } else if (!isThisYear(postDate)) {
-            return `${format(postDate, 'MM/dd/yyyy')}`;
-        } else {
-            return `${format(postDate, 'MMM dd')}`;
-        }
-    }
-
     const populateFeed = () => {
         const items = posts.map(post => 
-            <Link to={`/posts/${post._id}`} key={uuid()}>
-                <div className='feed-post' key={uuid()}>
-                    <div className='post-left'>
-                        <p>{post.tags.name}</p>
-                        {post.title.split(' ').length > 4 ? <h2 className='smaller-title'>{post.title}</h2> : <h2>{post.title}</h2>}
-                        <div className='post-left-date'>
-                            <img src={clockImg} alt=''/>
-                            <p>
-                                {getDate(post.date as unknown as string)}
-                            </p>
-                        </div>
-                    </div>
-                    <div className='post-right'>
-                        <div></div>
-                    </div>
-                </div>
-            </Link>
+            <PostItem _id={post._id} title={post.title} date={post.date} tags={post.tags} key={uuid()}/>
         );
 
         return <div className='posts'>{items}</div>
