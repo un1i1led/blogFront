@@ -42,9 +42,7 @@ const Sidebar = (props: SidebarProps) => {
         <div className={props.showSidebar == true ? 'sidebar show' : 'sidebar'}>
             <div className='sdbar-top'>
                 <div className='sdbar-p'>
-                    <Link to={'/'} onClick={props.controlSidebar}>
-                        <p>Blog</p>
-                    </Link>
+                    <Link to={'/'} onClick={props.controlSidebar}>Blog</Link>
                 </div>
                 <div className='sdbar-x'>
                     <p onClick={props.controlSidebar}>X</p>
