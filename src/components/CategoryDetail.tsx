@@ -16,6 +16,7 @@ interface Post {
     date: Date;
     published: boolean;
     tags: Category;
+    img: string;
 }
 
 const CategoryDetail = () => {
@@ -45,7 +46,8 @@ const CategoryDetail = () => {
 
     const populateFeed = () => {
         const items = posts.map((post) => <PostItem _id={post._id} 
-        title={post.title} date={post.date} tags={post.tags} key={uuid()}/>)
+        title={post.title} date={post.date} tags={post.tags} key={uuid()}
+        img={post.img? post.img : ''}/>)
 
         return <div className='posts'>{items}</div>
     }
