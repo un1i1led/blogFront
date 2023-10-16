@@ -14,6 +14,7 @@ interface Post {
     title: string;
     date: Date;
     tags: Category;
+    img: string;
 }
 
 const PostItem = (props: Post) => {
@@ -45,7 +46,9 @@ const PostItem = (props: Post) => {
                         </div>
                     </div>
                     <div className='post-right'>
-                        <div></div>
+                        {props.img.length > 1 ? <div>
+                            <img src={props.img}/>
+                        </div> : <div className='right-no-img'></div>}
                     </div>
                 </div>
             </Link>
