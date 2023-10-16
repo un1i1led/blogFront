@@ -49,6 +49,7 @@ const ArticleDetail = (props: ArticleDetailProps) => {
     const [activeUser, setActiveUser] = useState(false);
     const [username, setUsername] = useState('');
     const [author, setAuthor] = useState<Author>(null);
+    const [img, setImg] = useState();
     const today = new Date();
 
     const postId = window.location.pathname.split('/')[2];
@@ -73,6 +74,10 @@ const ArticleDetail = (props: ArticleDetailProps) => {
                     if (setPost.length <= 1) {
                         setPost(res.post);
                         setAuthor(res.post.user);
+                    }
+
+                    if (typeof res.post.img !== 'undefined') {
+                        setImg(res.post.img);
                     }
                 })
         }
@@ -122,7 +127,13 @@ const ArticleDetail = (props: ArticleDetailProps) => {
                 <h1>{post?.title}</h1>
             </div>
             <div className='image'>
-                <div className='img-placeholder'></div>
+                {img && 
+                <div>
+                    <img src={img} alt='' className='active-img'/>    
+                </div>}
+                {!img && 
+                    <div className='img-placeholder'></div>
+                }
                 <div className='article-info'>
                     <p className='info-small'>by {author?.name}</p>
                     <p className='info-small'>• {post?.tags.name}</p>
