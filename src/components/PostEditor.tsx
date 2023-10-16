@@ -5,6 +5,7 @@ const PostEditor = () => {
     const [title, setTitle] = useState('');
     const [tag, setTag] = useState('');
     const [body, setBody] = useState('');
+    const [articleImg, setArticleImg] = useState<File | undefined>();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -50,16 +51,52 @@ const PostEditor = () => {
         return false;
     }
 
+    const submitImage = async () => {
+        const formData = new FormData();
+        formData.append('image', articleImg as File);
+    
+        try {
+            const response = await fetch('http://localhost:3000/posts/new/image', {
+                method: 'POST',
+                body: formData
+            });
+    
+            const res = await response.json();
+    
+            if (res.errors) {
+                return { error: res.errors };
+            } else {
+                return { url: res.url };
+            }
+        } catch (error) {
+            return { error: 'An error occurred while uploading the image.' };
+        }
+    }
+    
     const submitPost = async (publish: boolean) => {
-        const formData = { title, tag, body, published: publish }
-
+        let data = {}
+    
+        if (articleImg !== undefined) {
+            const result = await submitImage();
+    
+            if (result.error) {
+                console.error(result.error);
+            } else {
+                const formData = { title, tag, body, published: publish, pathUrl: result.url };
+                data = formData;
+            }
+        } else {
+            const formData = { title, tag, body, published: publish, pathUrl: '' };
+            data = formData;
+        }
+        
         await fetch(`http://localhost:3000/posts/new`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('userToken')}`,
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(formData)
+            body: JSON.stringify(data)
         })
         .then((res) => res.json())
         .then((res) => {
@@ -69,8 +106,9 @@ const PostEditor = () => {
                 navigate(`${res.postUrl}`);
             }
         })
+        
     }
-
+    
     return (
         <div className='post-editor'>
             <div className='editor-topbar'>
@@ -78,7 +116,9 @@ const PostEditor = () => {
             </div>
             <div className='editor-mid'>
                 <div>
-                    <button>Add a cover image</button>
+                    <label htmlFor='img'>Add a cover image</label>
+                    <input type='file' name='image' id='image' accept='image/jpeg, image/png, image/jpg'
+                    onChange={(e) => setArticleImg(e.target.files ? e.target.files[0] : undefined)}/>
                 </div>
                 <div>
                     <input name='title' type='text' className='editor-title-input' placeholder='New post title here..'
