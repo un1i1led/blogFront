@@ -1,55 +1,84 @@
-import img1 from '../assets/breakfast.jpg';
-import img2 from '../assets/stars.jpg';
 import clockImg from '../assets/clock-ten-thirty-svgrepo-com.svg';
+import { formatDistance, parseISO, isThisWeek, format, isThisYear } from 'date-fns';
+import { useEffect, useState } from 'react';
+
+interface Post {
+    _id: string;
+    title: string;
+    body: string;
+    date: Date;
+    published: boolean;
+    tags: Category;
+    img: string;
+}
+
+interface Category {
+    _id: string;
+    name: string;
+    name_lowered: string;
+}
 
 const Spotlight = () => {
-    const posts = [
-        {
-            id: 1,
-            imgLink: img1,
-            title: 'Lorem ipsum dolor sit amet',
-            body: 'posuere. Vivamus pulvinar augue tellus, nec imperdiet leo convallis at. Sed gravida feugiat orci a ultricies. In dapibus mauris et dolor congue volutpat. Cras non turpis sodales, sodales tortor sed, pharetra nisl. Sed tincidunt ipsum nec elit placerat, quis feugiat felis tincidunt. Suspendisse potenti.',
-            date: '1h ago',
-            tags: ['NFT', 'Technology'],
-            published: true
-        },
-        {
-            id: 2,
-            imgLink: img2,
-            title: 'second post',
-            body: 'dakidw kdawiko',
-            date: '1h ago',
-            tags: ['NFT', 'Technology'],
-            published: true
-        },
-        {
-            id: 3,
-            title: 'third post',
-            body: 'diqwd iwqdkid dwdw',
-            date: '2h ago',
-            tags: ['NFT', 'Technology'],
-            published: true
+    const [post, setPost] = useState<Post>();
+    const today = new Date();
+
+    useEffect(() => {
+        const fetchPost = async () => {
+            await fetch('http://localhost:3000/spotlight')
+            .then((res) => res.json())
+            .then((res) => setPost(res.post))
         }
-    ];
+
+        fetchPost();
+
+    }, [])
+
+    const getDate = (date: string) => {
+        const postDate = parseISO(date);
+
+        if (isThisWeek(postDate)) {
+            return `${formatDistance(today, postDate)} ago`;
+        } else if (!isThisYear(postDate)) {
+            return `${format(postDate, 'MM/dd/yyyy')}`;
+        } else {
+            return `${format(postDate, 'MMM dd')}`;
+        }
+    }
+
+    const imageOrDiv = () => {
+        if (typeof post == 'undefined' || post.img.length < 1) {
+            return <div id='spotlight-div-img'></div>
+        } else {
+            return <img src={post.img} alt=''/>
+        }
+    }
+
+    const popDivs = () => {
+        return (
+            <>
+                <div className='spotlight-main'>
+                    {imageOrDiv()}
+                    <span className='spotlight-text'><p>Trending</p></span>
+                </div>
+                <div className='spotlight-info'>
+                    <h1>{post?.title}</h1>
+                    <div className='info-small'>
+                        <a href='/'>
+                            <p>{post?.tags.name}</p>
+                        </a>
+                        <div className='small-date'>
+                            <img className='no-click' src={clockImg} alt=''/>
+                            <p>{getDate(post?.date as unknown as string)}</p>
+                        </div>
+                    </div>
+                </div>
+            </>
+        )
+    }
 
     return (
         <div className='spotlight'>
-            <div className='spotlight-main'>
-                <img src={posts[0].imgLink} alt=''/>
-                <span className='spotlight-text'><p>Trending</p></span>
-            </div>
-            <div className='spotlight-info'>
-                <h1>{posts[0].title}</h1>
-                <div className='info-small'>
-                    <a href='/'>
-                        <p>{posts[0].tags[0]}</p>
-                    </a>
-                    <div className='small-date'>
-                        <img className='no-click' src={clockImg} alt=''/>
-                        <p>{posts[0].date}</p>
-                    </div>
-                </div>
-            </div>
+            {post?._id ? popDivs() : ''}
         </div>
     )
 }
