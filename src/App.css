@@ -204,6 +204,13 @@ img {
     border-radius: 1.5em;
 }
 
+#spotlight-div-img {
+    width: 100%;
+    background-color: var(--secondary);
+    height: 12em;
+    border-radius: 0.5em;
+}
+
 .spotlight-text {
     left: 2.5em;
     top: 1.5em;
@@ -241,6 +248,7 @@ img {
 .small-date {
     display: flex;
     align-items: center;
+    gap: 5px;
 }
 
 .small-date img {
@@ -327,11 +335,16 @@ img {
     justify-content: center;
 }
 
-.post-right div {
+.right-no-img {
     height: 89px;
     width: 92px;
     background-color: var(--secondary);
     border-radius: 1.5em;
+}
+
+.post-right div img {
+    width: 90px;
+    border-radius: 0.5em;
 }
 
 /* Article Detail */
