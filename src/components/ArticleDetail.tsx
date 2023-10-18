@@ -7,6 +7,7 @@ import Comment from '../components/Comment';
 
 interface ArticleDetailProps {
     changeToken: (value: boolean) => void;
+    usrImg: string;
 }
 
 interface Category {
@@ -18,6 +19,7 @@ interface Category {
 interface User {
     _id: string;
     name: string;
+    img: string;
 }
 
 interface Post {
@@ -170,7 +172,7 @@ const ArticleDetail = (props: ArticleDetailProps) => {
             </div>
             <div className='comments'>
                 <h3>Comments</h3>
-                {activeUser ? <div className='make-comment'><div className='comment-img'></div><CommentEditor postId={postId} username={username} addNewComment={addNewComment}/></div> : ''}
+                {activeUser ? <div className='make-comment'><div className='smallest-circle'><img src={props.usrImg} alt=''/></div><CommentEditor postId={postId} username={username} addNewComment={addNewComment}/></div> : ''}
                 {comments.map((data) => <Comment comment={data} getDate={getDate} key={uuid()}/>)}
                 <button className='comment-btn' onClick={changeCommentPage}>Load more comments</button>
             </div>
