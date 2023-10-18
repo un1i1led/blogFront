@@ -29,11 +29,20 @@ interface Category {
 const Profile = () => {
     const [user, setUser] = useState<User>();
     const [posts, setPosts] = useState<Post[]>([]);
+    const [myProfile, setMyProfile] = useState(false);
+    const [userImg, setUserImg] = useState('');
+    const [img, setImg] = useState<File | undefined>();
+    const [firstRender, setFirstRender] = useState(true);
     const params = useParams();
 
     useEffect(() => {
         const fetchData = async () => {
-            await fetch(`http://localhost:3000/user/${params.username}`)
+            await fetch(`http://localhost:3000/user/${params.username}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('userToken')}`,
+                }
+            })
             .then((res) => res.json())
             .then((res) => {
                 const newPosts: Post[] = [];
@@ -44,11 +53,75 @@ const Profile = () => {
                 })
 
                 setPosts([...newPosts]);
+
+                if (res.username == res.user.username) {
+                    setMyProfile(true);
+                }
+
+                setUserImg(res.user.img);
             });
         }
 
         fetchData();
     }, [])
+
+    useEffect(() => {
+        if (firstRender == true) {
+            setFirstRender(false);
+        } else if (typeof img !== 'undefined') {
+            updateProfileImg();
+        }
+    }, [img])
+
+    const submitImage = async () => {
+        const formData = new FormData();
+        formData.append('image', img as File);
+
+        try {
+            const response = await fetch('http://localhost:3000/posts/new/image',  {
+                method: 'POST',
+                body: formData
+            });
+
+            const res = await response.json();
+
+            if (res.errors) {
+                return { error: res.errors };
+            } else {
+                return { url: res.url };
+            }
+
+        } catch (error) {
+            return { error: 'An error ocurred while uploading the image.' };
+        }
+    }
+
+    const updateProfileImg = async () => {
+        const result = await submitImage();
+
+        if (result.error) {
+            console.log(result.error);
+        } else {
+            const data = { imgurl: result.url }
+            console.log('data ' + result.url);
+            await fetch(`http://localhost:3000/user/${user?.username}`, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('userToken')}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then((res) => res.json())
+            .then((res) => {
+                if (res.errors) {
+                    console.log(res)
+                } else {
+                    setUserImg(result.url);
+                }
+            })
+        }
+    }
 
     const populateFeed = () => {
         const items = posts.map(post => 
@@ -60,20 +133,23 @@ const Profile = () => {
     }
 
     const checkImage = () => {
-        console.log('checked img');
         if (user) {
-            if (user.img.length > 1) {
-                return <img src={user.img} alt='user image'/>
+            if (userImg.length > 1) {
+                return <img src={userImg} alt='user image' onClick={myProfile ? openFileDialogue : undefined}/>
             } else {
-                return <img src={noUserImg} alt='user image'/>
+                return <img src={noUserImg} alt='user image' onClick={myProfile ? openFileDialogue : undefined}/>
             }
         }
+    }
+
+    const openFileDialogue = () => {
+        document.getElementById('file')?.click();
     }
 
     return (
         <div className='profile-main'>
             <div className='user-info-main'>
-                {checkImage()}
+                <div className='circle'>{checkImage()}</div>
                 <div className='user-info-text'>
                     <h1>{user?.name}</h1>
                     <p>@{user?.username}</p>
@@ -89,6 +165,7 @@ const Profile = () => {
                 <h2>Posts</h2>
                 {populateFeed()}
             </div>
+            {myProfile && <input type='file' id='file' onChange={(e) => setImg(e.target.files ? e.target.files[0] : undefined)}/>}
         </div>
     )
 }
