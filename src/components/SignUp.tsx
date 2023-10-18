@@ -38,7 +38,7 @@ const SignUp = () => {
                 } else {
                     setActiveUser(true);
                     setTimeout(() => {
-                        navigate('/');
+                        navigate('/login');
                     }, 3000);
                 }
             })
