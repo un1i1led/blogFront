@@ -59,10 +59,21 @@ const Profile = () => {
         return <div className='posts'>{items}</div>
     }
 
+    const checkImage = () => {
+        console.log('checked img');
+        if (user) {
+            if (user.img.length > 1) {
+                return <img src={user.img} alt='user image'/>
+            } else {
+                return <img src={noUserImg} alt='user image'/>
+            }
+        }
+    }
+
     return (
         <div className='profile-main'>
             <div className='user-info-main'>
-                {user?.img.length > 1 ? <img src={user?.img} alt='user image'/> : <img src={noUserImg} alt='user iamge'/>}
+                {checkImage()}
                 <div className='user-info-text'>
                     <h1>{user?.name}</h1>
                     <p>@{user?.username}</p>
