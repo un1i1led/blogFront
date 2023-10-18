@@ -16,6 +16,7 @@ function App() {
   const [hasToken, setHasToken] = useState(false);
   const [showSidebar, setShowSidebar] = useState(false);
   const [username, setUsername] = useState('');
+  const [usrImg, setUsrImg] = useState('');
 
   const changeToken = (value: boolean) => {
     setHasToken(value);
@@ -29,13 +30,18 @@ function App() {
     setUsername(usrname);
   }
 
+  const changeUsrImg = (usrImg: string) => {
+    setUsrImg(usrImg);
+  }
+
   return (
     <Router>
       <div className='App'>
-        <Nav hasToken={hasToken} controlSidebar={controlSidebar} username={username} changeToken={changeToken} changeUsername={changeUsername}/>
+        <Nav hasToken={hasToken} controlSidebar={controlSidebar} username={username} changeToken={changeToken} changeUsername={changeUsername}
+        changeUsrImg={changeUsrImg}/>
         <Routes>
-          <Route path='/' element={<Home changeToken={changeToken} changeUsername={changeUsername}/>}/>
-          <Route path='/posts/:postid' element={<ArticleDetail changeToken={changeToken}/>}/>
+          <Route path='/' element={<Home changeToken={changeToken} changeUsername={changeUsername} changeUsrImg={changeUsrImg}/>}/>
+          <Route path='/posts/:postid' element={<ArticleDetail changeToken={changeToken} usrImg={usrImg}/>}/>
           <Route path='/login' element={<Login/>}/>
           <Route path='/signup' element={<SignUp/>}/>
           <Route path='/new' element={<PostEditor/>}/>
@@ -44,7 +50,7 @@ function App() {
           <Route path='/user/:username' element={<Profile/>}/>
         </Routes>
       </div>
-      <Sidebar showSidebar={showSidebar} hasToken={hasToken} controlSidebar={controlSidebar} changeToken={changeToken}/>
+      <Sidebar showSidebar={showSidebar} hasToken={hasToken} controlSidebar={controlSidebar} changeToken={changeToken} changeUsrImg={changeUsrImg}/>
       <div className={showSidebar == true ? 'cover covering' : 'cover'}></div>
     </Router>
   )
