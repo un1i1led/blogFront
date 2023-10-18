@@ -32,7 +32,7 @@ function App() {
   return (
     <Router>
       <div className='App'>
-        <Nav hasToken={hasToken} controlSidebar={controlSidebar} username={username}/>
+        <Nav hasToken={hasToken} controlSidebar={controlSidebar} username={username} changeToken={changeToken} changeUsername={changeUsername}/>
         <Routes>
           <Route path='/' element={<Home changeToken={changeToken} changeUsername={changeUsername}/>}/>
           <Route path='/posts/:postid' element={<ArticleDetail changeToken={changeToken}/>}/>
