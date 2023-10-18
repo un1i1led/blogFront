@@ -6,6 +6,7 @@ interface CommentDetail {
 interface User {
     _id: string;
     name: string;
+    img: string;
 }
 
 interface Comment {
@@ -17,10 +18,16 @@ interface Comment {
 }
 
 const Comment = (props: CommentDetail) => {
+    const versionPart = /\/v\d+/;
+    console.log(props.comment.user.img);
+    const smallerImg = props.comment.user.img?.replace(versionPart, '/c_scale,h_32,w_32');
+
     return (
         <div className='comment-main'>
             <div className='comment-left'>
-                <div className='comment-img'></div>
+                <div className='smallest-circle'>
+                    <img src={smallerImg} alt='user image'/>
+                </div>
             </div>
             <div className='comment-right'>
                 <div className='comment-right-top'>
