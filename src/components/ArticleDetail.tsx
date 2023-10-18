@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { v4 as uuid } from 'uuid';
+import { Link, useNavigate } from 'react-router-dom';
 import { formatDistance, parseISO, isThisWeek, format, isThisYear } from 'date-fns';
 import CommentEditor from './CommentEditor';
 import Comment from '../components/Comment';
@@ -48,11 +49,13 @@ const ArticleDetail = (props: ArticleDetailProps) => {
     const [comments, setComments] = useState<CommentType[]>([]);
     const [activeUser, setActiveUser] = useState(false);
     const [username, setUsername] = useState('');
-    const [author, setAuthor] = useState<Author>(null);
+    const [author, setAuthor] = useState<Author>();
     const [img, setImg] = useState();
     const today = new Date();
+    const [isAuthor, setIsAuthor] = useState(false);
 
     const postId = window.location.pathname.split('/')[2];
+    const navigate = useNavigate();
 
     useEffect(() => {
         async function fetchPost() {
@@ -78,6 +81,10 @@ const ArticleDetail = (props: ArticleDetailProps) => {
 
                     if (typeof res.post.img !== 'undefined') {
                         setImg(res.post.img);
+                    }
+
+                    if (res.post.user.username == res.username) {
+                        setIsAuthor(true);
                     }
                 })
         }
@@ -121,6 +128,20 @@ const ArticleDetail = (props: ArticleDetailProps) => {
         setComments([...newComments, ...comments])
     }
 
+    const handleDelete = async () => {
+        await fetch(`http://localhost:3000/posts/${post?._id}`, {
+            method: 'DELETE'
+        })
+        .then((res) => res.json())
+        .then((res) => {
+            if (res.error) {
+                console.log(res.error)
+            } else {
+                navigate('/');
+            }
+        })
+    } 
+
     return (
         <div className='article-detail'>
             <div className='article-title'>
@@ -135,8 +156,13 @@ const ArticleDetail = (props: ArticleDetailProps) => {
                     <div className='img-placeholder'></div>
                 }
                 <div className='article-info'>
-                    <p className='info-small'>by {author?.name}</p>
-                    <p className='info-small'>• {post?.tags.name}</p>
+                    <div className='article-info-left'>
+                        <Link to={`/user/${author?.username}`}>
+                            <p className='info-small'>by {author?.name}</p>
+                        </Link>
+                        <p className='info-small'>• {post?.tags.name}</p>
+                    </div>
+                    {isAuthor && <p className='third' id='delete' onClick={handleDelete}>Delete Article</p>}
                 </div>
             </div>
             <div className='post-body'>
