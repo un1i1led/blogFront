@@ -10,10 +10,12 @@ import PostEditor from './components/PostEditor';
 import AllCategories from './components/AllCategories';
 import CategoryDetail from './components/CategoryDetail';
 import Sidebar from './components/Sidebar';
+import Profile from './components/Profile';
 
 function App() {
   const [hasToken, setHasToken] = useState(false);
   const [showSidebar, setShowSidebar] = useState(false);
+  const [username, setUsername] = useState('');
 
   const changeToken = (value: boolean) => {
     setHasToken(value);
@@ -23,18 +25,23 @@ function App() {
     showSidebar == false ? setShowSidebar(true) : setShowSidebar(false);
   }
 
+  const changeUsername = (usrname: string) => {
+    setUsername(usrname);
+  }
+
   return (
     <Router>
       <div className='App'>
-        <Nav hasToken={hasToken} controlSidebar={controlSidebar}/>
+        <Nav hasToken={hasToken} controlSidebar={controlSidebar} username={username}/>
         <Routes>
-          <Route path='/' element={<Home changeToken={changeToken}/>}/>
+          <Route path='/' element={<Home changeToken={changeToken} changeUsername={changeUsername}/>}/>
           <Route path='/posts/:postid' element={<ArticleDetail changeToken={changeToken}/>}/>
           <Route path='/login' element={<Login/>}/>
           <Route path='/signup' element={<SignUp/>}/>
           <Route path='/new' element={<PostEditor/>}/>
           <Route path='/allcategories' element={<AllCategories/>}/>
           <Route path='/category/:categoryid' element={<CategoryDetail/>}/>
+          <Route path='/user/:username' element={<Profile/>}/>
         </Routes>
       </div>
       <Sidebar showSidebar={showSidebar} hasToken={hasToken} controlSidebar={controlSidebar} changeToken={changeToken}/>
