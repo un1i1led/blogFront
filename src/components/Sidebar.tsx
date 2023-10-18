@@ -1,13 +1,16 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 interface SidebarProps {
     showSidebar: boolean;
     hasToken: boolean;
     controlSidebar: () => void;
     changeToken: (value: boolean) => void;
+    changeUsrImg: (usrImg: string) => void;
 }
 
 const Sidebar = (props: SidebarProps) => {
+    const navigate = useNavigate();
+
     const popList = () => {
         if (props.hasToken) {
             return (
@@ -36,6 +39,8 @@ const Sidebar = (props: SidebarProps) => {
         props.changeToken(false);
         props.controlSidebar();
         localStorage.removeItem('userToken');
+        props.changeUsrImg('');
+        navigate('/');
     }
 
     return (

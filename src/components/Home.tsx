@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 interface HomeProps {
     changeToken: (value: boolean) => void;
     changeUsername: (usrname: string) => void;
+    changeUsrImg: (usrImg: string) => void;
 }
 
 const Home = (props: HomeProps) => {
@@ -27,6 +28,7 @@ const Home = (props: HomeProps) => {
                 localStorage.removeItem('userToken');
                 props.changeToken(false);
                 props.changeUsername('');
+                props.changeUsrImg('');
               }
             });
         }
