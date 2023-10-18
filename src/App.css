@@ -58,6 +58,16 @@ img {
     margin-top: 1em;
 }
 
+.circle {
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 /* Sidebar */
 
 .cover {
@@ -712,6 +722,10 @@ img {
 
 .user-posts > h2 {
     font-size: 1.5em;
+}
+
+.profile-main input {
+    display: none;
 }
 
 /* small tablet styles */
