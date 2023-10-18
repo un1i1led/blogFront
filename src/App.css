@@ -68,6 +68,26 @@ img {
     align-items: center;
 }
 
+.small-circle {
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.smallest-circle {
+    border-radius: 50%;
+    height: 32px;
+    width: 32px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 /* Sidebar */
 
 .cover {
