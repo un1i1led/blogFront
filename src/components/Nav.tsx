@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 
 interface NavDetails {
     hasToken: boolean;
+    username: string;
     controlSidebar: () => void;
 }
 
@@ -28,7 +29,9 @@ const Nav = (props: NavDetails) => {
                 <div className='nav nav-right'>
                     <div>
                         <img className='mid-img' src={notifImg} alt='notifications'/>
-                        <div className='comment-img'></div>
+                        <Link to={`/user/${props.username}`}>
+                            <div className='comment-img'></div>
+                        </Link>
                     </div>
                 </div>
             </div>
