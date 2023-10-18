@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 
 interface HomeProps {
     changeToken: (value: boolean) => void;
+    changeUsername: (usrname: string) => void;
 }
 
 const Home = (props: HomeProps) => {
@@ -21,9 +22,11 @@ const Home = (props: HomeProps) => {
             .then((res) => {
               if (res.msg == 'authorized') {
                 props.changeToken(true);
+                props.changeUsername(res.username);
               } else {
                 localStorage.removeItem('userToken');
                 props.changeToken(false);
+                props.changeUsername('');
               }
             });
         }
