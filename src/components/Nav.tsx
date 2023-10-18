@@ -1,7 +1,7 @@
 import notifImg from '../assets/notification-14-svgrepo-com.svg';
 import hamburger from '../assets/hamburger-svgrepo-com.svg';
 import { Link, useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 interface NavDetails {
     hasToken: boolean;
@@ -9,9 +9,12 @@ interface NavDetails {
     controlSidebar: () => void;
     changeToken: (value: boolean) => void;
     changeUsername: (usrname: string) => void;
+    changeUsrImg: (usrImg: string) => void;
 }
 
 const Nav = (props: NavDetails) => {
+    const [img, setImg] = useState('');
+    const [firstRender, setFirstRender] = useState(true);
     const location = useLocation();
 
     useEffect(() => {
@@ -39,6 +42,38 @@ const Nav = (props: NavDetails) => {
         checkToken();
     }, [])
 
+    useEffect(() => {
+        const getImage = async () => {
+            console.log(props.username);
+            await fetch(`http://localhost:3000/user/${props.username}/image`, {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('userToken')}`,
+                }
+            })
+            .then((res) => res.json())
+            .then((res) => {
+                if (res.errors) {
+                    console.log(res)
+                } else {
+                    const imgUrl = res.img.img;
+                    const versionPart = /\/v\d+/;
+                    const scaledImg = imgUrl.replace(versionPart, '/c_scale,h_40,w_40');
+
+                    setImg(scaledImg);
+
+                    const smallerImg = imgUrl.replace(versionPart, '/c_scale,h_32,w_32');
+                    props.changeUsrImg(smallerImg);
+                }
+            })
+        }
+
+        if (firstRender == true) {
+            setFirstRender(false);
+        } else {
+            getImage();
+        }
+    }, [props.username])
+
     const popWhenToken = () => {
         return (
             <div className='nav-main'>
@@ -58,7 +93,9 @@ const Nav = (props: NavDetails) => {
                     <div>
                         <img className='mid-img' src={notifImg} alt='notifications'/>
                         <Link to={`/user/${props.username}`}>
-                            <div className='comment-img'></div>
+                            <div className='small-circle'>
+                                <img src={img} alt='user image'/>
+                            </div>
                         </Link>
                     </div>
                 </div>
