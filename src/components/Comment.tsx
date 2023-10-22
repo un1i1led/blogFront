@@ -19,7 +19,6 @@ interface Comment {
 
 const Comment = (props: CommentDetail) => {
     const versionPart = /\/v\d+/;
-    console.log(props.comment.user.img);
     const smallerImg = props.comment.user.img?.replace(versionPart, '/c_scale,h_32,w_32');
 
     return (

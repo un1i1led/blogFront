@@ -44,7 +44,6 @@ const Nav = (props: NavDetails) => {
 
     useEffect(() => {
         const getImage = async () => {
-            console.log(props.username);
             await fetch(`http://localhost:3000/user/${props.username}/image`, {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('userToken')}`,
@@ -122,6 +121,9 @@ const Nav = (props: NavDetails) => {
                     <div className='nav-login-div'>
                         <Link to={'/login'}>
                             <button className='nav-login-btn'>Login</button>
+                        </Link>
+                        <Link to={'/signup'} id='signup-nav-a'>
+                            <button className='nav-login-btn'>Signup</button>
                         </Link>
                     </div>
                 </div>
