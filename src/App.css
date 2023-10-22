@@ -224,6 +224,7 @@ img {
     border-radius: 0.2em;
     background-color: var(--primary);
     color: var(--third);
+    cursor: pointer;
 }
 
 #signup-nav-a {
