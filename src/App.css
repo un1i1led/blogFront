@@ -36,6 +36,10 @@ img {
     cursor: pointer;
 }
 
+.hide-mobile {
+    display: none;
+}
+
 .no-click {
     cursor: auto;
 }
@@ -220,6 +224,10 @@ img {
     border-radius: 0.2em;
     background-color: var(--primary);
     color: var(--third);
+}
+
+#signup-nav-a {
+    display: none;
 }
 
 /* spotlight */
@@ -538,7 +546,7 @@ img {
     color: white;
     border: none;
     border-radius: 1em;
-
+    cursor: pointer;
 }
 
 .signup-main a {
@@ -751,20 +759,130 @@ img {
 /* small tablet styles */
 
 @media screen and (min-width: 620px) {
-    body {
-        color: red;
-    }
+   
 }
 
 /* large tablets * laptop styles */
 
 @media screen and (min-width: 960px){
-
 }
 
 /* desktop styles */
 @media screen and (min-width: 1200px){
+    #root {
+        display: grid;
+        grid-template-columns: 0.5fr 1fr 0.5fr;
+    }
+
+    .cover {
+        display: none;
+    }
+
+    /* sidebar */
+
+    .sidebar {
+        width: auto;
+        position: static;
+        order: -1;
+    }
+
+    .sidebar.show {
+        width: auto;
+    }
+
+    .sdbar-top {
+        display: none;
+    }
+
+    .sidebar ul {
+        margin: 4.5em 2em 0 0;
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+    }
+
+    .sidebar ul li {
+        width: max-content;
+        cursor: pointer;
+    }
+
+    .sidebar ul a {
+        display: block;
+        width: max-content;
+    }
+
+    /* nav */
+
+    .nav-empty {
+        margin: 0 3em;
+    }
+
+    .nav-left {
+        display: none;
+    }
+
+    .nav-main {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .nav-login-div {
+        gap: 15px;
+    }
+
+    #signup-nav-a {
+        display: block;
+    }
+
+    #signup-nav-a button {
+        border-color: black;
+        color: black;
+    }
+
+    /* spotlight */
+
+    .spotlight-main {
+        display: flex;
+        justify-content: center;
+    }
+
     .spotlight-main img {
-        max-width: 50%;
+        height: 400px;
+        width: fill;
+    }
+
+    /* Article Feed */
+
+    .cat-list {
+        justify-content: center;
+        gap: 1em;
+    }
+
+    .post-right {
+        align-items: end;
+    }
+
+    /* signup */
+
+    .signup-main,
+    .login-main {
+        margin: 1em 15em 1em 15em;
+    }
+
+    /* comments */
+    #comment-form form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .active-img {
+        height: 400px;
+        width: -webkit-fill-available;
+    }
+
+    @-moz-document url-prefix() {
+        .active-img {
+            width: fit-content;
+        }
     }
 }
