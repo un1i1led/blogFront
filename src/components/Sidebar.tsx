@@ -54,6 +54,9 @@ const Sidebar = (props: SidebarProps) => {
                 </div>
             </div>
             <ul>
+                <Link to={'/'} className='hide-mobile'>
+                    <li>Home</li>
+                </Link>
                 <li>About</li>
                 <Link to={'/allcategories'} onClick={props.controlSidebar}>
                     <li>All Categories</li>
