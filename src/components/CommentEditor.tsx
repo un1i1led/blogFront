@@ -3,6 +3,7 @@ import { useState } from 'react';
 interface User {
     _id: string;
     name: string;
+    img: string;
 }
 
 interface CommentType {
