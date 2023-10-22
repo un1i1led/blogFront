@@ -35,7 +35,7 @@ function App() {
   }
 
   return (
-    <Router>
+    <Router basename={import.meta.env.DEV ? '/' : '/blogFront/'}>
       <div className='App'>
         <Nav hasToken={hasToken} controlSidebar={controlSidebar} username={username} changeToken={changeToken} changeUsername={changeUsername}
         changeUsrImg={changeUsrImg}/>
