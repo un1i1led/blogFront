@@ -40,7 +40,7 @@ function App() {
         <Nav hasToken={hasToken} controlSidebar={controlSidebar} username={username} changeToken={changeToken} changeUsername={changeUsername}
         changeUsrImg={changeUsrImg}/>
         <Routes>
-          <Route path='/blogFront' element={<Home changeToken={changeToken} changeUsername={changeUsername} changeUsrImg={changeUsrImg}/>}/>
+          <Route path='/' element={<Home changeToken={changeToken} changeUsername={changeUsername} changeUsrImg={changeUsrImg}/>}/>
           <Route path='/posts/:postid' element={<ArticleDetail changeToken={changeToken} usrImg={usrImg}/>}/>
           <Route path='/login' element={<Login/>}/>
           <Route path='/signup' element={<SignUp/>}/>
