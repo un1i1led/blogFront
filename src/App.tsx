@@ -52,6 +52,7 @@ function App() {
       </div>
       <Sidebar showSidebar={showSidebar} hasToken={hasToken} controlSidebar={controlSidebar} changeToken={changeToken} changeUsrImg={changeUsrImg}/>
       <div className={showSidebar == true ? 'cover covering' : 'cover'}></div>
+      <div className='right-space'></div>
     </Router>
   )
 }
