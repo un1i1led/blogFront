@@ -56,7 +56,9 @@ const ArticleDetail = (props: ArticleDetailProps) => {
     const today = new Date();
     const [isAuthor, setIsAuthor] = useState(false);
 
-    const postId = window.location.pathname.split('/')[2];
+    const splitted = window.location.pathname.split('/');
+    const postId = splitted[splitted.length - 1];
+
     const navigate = useNavigate();
 
     useEffect(() => {
