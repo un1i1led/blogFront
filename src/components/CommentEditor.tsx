@@ -43,7 +43,7 @@ const CommentEditor = (props: CommentProps) => {
                     post: res.comment.post,
                     _id: res.comment.id,
                     __v: res.comment.__v,
-                    user: {_id: res.comment.user, name: res.name}
+                    user: {_id: res.comment.user, name: res.name, img: res.img}
                 }
 
                 props.addNewComment(newComment)
