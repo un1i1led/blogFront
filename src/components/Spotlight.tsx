@@ -1,6 +1,7 @@
 import clockImg from '../assets/clock-ten-thirty-svgrepo-com.svg';
 import { formatDistance, parseISO, isThisWeek, format, isThisYear } from 'date-fns';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface Post {
     _id: string;
@@ -21,6 +22,7 @@ interface Category {
 const Spotlight = () => {
     const [post, setPost] = useState<Post>();
     const today = new Date();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchPost = async () => {
@@ -53,10 +55,14 @@ const Spotlight = () => {
         }
     }
 
+    const navToPostDetail = () => {
+        navigate(`/posts/${post?._id}`);
+    }
+
     const popDivs = () => {
         return (
             <>
-                <div className='spotlight-main'>
+                <div className='spotlight-main' onClick={navToPostDetail}>
                     {imageOrDiv()}
                     <span className='spotlight-text'><p>Trending</p></span>
                 </div>
