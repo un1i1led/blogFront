@@ -37,7 +37,7 @@ const Profile = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            await fetch(`http://localhost:3000/user/${params.username}`, {
+            await fetch(`https://delicate-leaf-1408.fly.dev/user/${params.username}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('userToken')}`,
@@ -78,7 +78,7 @@ const Profile = () => {
         formData.append('image', img as File);
 
         try {
-            const response = await fetch('http://localhost:3000/posts/new/image',  {
+            const response = await fetch('https://delicate-leaf-1408.fly.dev/posts/new/image',  {
                 method: 'POST',
                 body: formData
             });
@@ -104,7 +104,7 @@ const Profile = () => {
         } else {
             const data = { imgurl: result.url }
             console.log('data ' + result.url);
-            await fetch(`http://localhost:3000/user/${user?.username}`, {
+            await fetch(`https://delicate-leaf-1408.fly.dev/user/${user?.username}`, {
                 method: 'PUT',
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('userToken')}`,

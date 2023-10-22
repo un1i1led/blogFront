@@ -15,7 +15,7 @@ const AllCategories = () => {
         const fetchCategories = async () => {
             const cats: Category[] = [];
 
-            await fetch('http://localhost:3000/tags/all')
+            await fetch('https://delicate-leaf-1408.fly.dev/tags/all')
                 .then((res) => res.json())
                 .then((res) => {
                     res.tags.map((data: Category) => cats.push(data));

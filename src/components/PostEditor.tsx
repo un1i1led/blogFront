@@ -10,7 +10,7 @@ const PostEditor = () => {
 
     useEffect(() => {
         const checkForUser = async () => {
-            await fetch('http://localhost:3000/login', {
+            await fetch('https://delicate-leaf-1408.fly.dev/login', {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('userToken')}`,
@@ -56,7 +56,7 @@ const PostEditor = () => {
         formData.append('image', articleImg as File);
     
         try {
-            const response = await fetch('http://localhost:3000/posts/new/image', {
+            const response = await fetch('https://delicate-leaf-1408.fly.dev/posts/new/image', {
                 method: 'POST',
                 body: formData
             });
@@ -90,7 +90,7 @@ const PostEditor = () => {
             data = formData;
         }
         
-        await fetch(`http://localhost:3000/posts/new`, {
+        await fetch(`https://delicate-leaf-1408.fly.dev/posts/new`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('userToken')}`,

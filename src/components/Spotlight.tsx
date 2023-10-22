@@ -24,7 +24,7 @@ const Spotlight = () => {
 
     useEffect(() => {
         const fetchPost = async () => {
-            await fetch('http://localhost:3000/spotlight')
+            await fetch('https://delicate-leaf-1408.fly.dev/spotlight')
             .then((res) => res.json())
             .then((res) => setPost(res.post))
         }

@@ -12,7 +12,7 @@ const Home = (props: HomeProps) => {
 
     useEffect(() => {
         const checkToken = async () => {
-          await fetch('http://localhost:3000/token', {
+          await fetch('https://delicate-leaf-1408.fly.dev/token', {
             method: 'GET',
             headers: {
               'Authorization': `Bearer ${localStorage.getItem('userToken')}`,

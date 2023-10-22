@@ -24,7 +24,7 @@ const SignUp = () => {
     const postUser = () => {
         const formData = { name, username, email, password, confirm };
 
-        fetch('http://localhost:3000/signup', {
+        fetch('https://delicate-leaf-1408.fly.dev/signup', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(formData)

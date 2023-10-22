@@ -10,7 +10,7 @@ const Login = () => {
 
     useEffect(() => {
         const authLogin = async () => {
-            await fetch('http://localhost:3000/login', {
+            await fetch('https://delicate-leaf-1408.fly.dev/login', {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('userToken')}`,
@@ -33,7 +33,7 @@ const Login = () => {
     const login = async () => {
         const formData = { email, password };
 
-        await fetch('http://localhost:3000/login', {
+        await fetch('https://delicate-leaf-1408.fly.dev/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json'},
             body: JSON.stringify(formData)

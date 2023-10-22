@@ -28,7 +28,7 @@ const CategoryDetail = () => {
         const newPosts: Post[] = [];
 
         const fetchPosts = async () =>{
-            await fetch(`http://localhost:3000/posts/fromtag/${categoryId}?page=${postPage}&limit=3`)
+            await fetch(`https://delicate-leaf-1408.fly.dev/posts/fromtag/${categoryId}?page=${postPage}&limit=3`)
                 .then((res) => res.json())
                 .then((res) => {
                     res.results.map((data: Post) => newPosts.push(data));

@@ -61,7 +61,7 @@ const ArticleDetail = (props: ArticleDetailProps) => {
 
     useEffect(() => {
         async function fetchPost() {
-            await fetch(`http://localhost:3000/posts/${postId}`, {
+            await fetch(`https://delicate-leaf-1408.fly.dev/posts/${postId}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('userToken')}`,
@@ -98,7 +98,7 @@ const ArticleDetail = (props: ArticleDetailProps) => {
         const newComments: CommentType[] = [];
 
         async function fetchComments() {
-            await fetch(`http://localhost:3000/posts/${postId}/comments?page=${commentPage}&limit=2`)
+            await fetch(`https://delicate-leaf-1408.fly.dev/posts/${postId}/comments?page=${commentPage}&limit=2`)
                 .then(res => res.json())
                 .then(res => res.results.map((data: CommentType) => { newComments.push(data)}))
 
@@ -131,7 +131,7 @@ const ArticleDetail = (props: ArticleDetailProps) => {
     }
 
     const handleDelete = async () => {
-        await fetch(`http://localhost:3000/posts/${post?._id}`, {
+        await fetch(`https://delicate-leaf-1408.fly.dev/posts/${post?._id}`, {
             method: 'DELETE'
         })
         .then((res) => res.json())

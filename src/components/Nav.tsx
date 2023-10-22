@@ -19,7 +19,7 @@ const Nav = (props: NavDetails) => {
 
     useEffect(() => {
         const checkToken = async () => {
-            await fetch('http://localhost:3000/token', {
+            await fetch('https://delicate-leaf-1408.fly.dev/token', {
               method: 'GET',
               headers: {
                 'Authorization': `Bearer ${localStorage.getItem('userToken')}`,
@@ -44,7 +44,7 @@ const Nav = (props: NavDetails) => {
 
     useEffect(() => {
         const getImage = async () => {
-            await fetch(`http://localhost:3000/user/${props.username}/image`, {
+            await fetch(`https://delicate-leaf-1408.fly.dev/user/${props.username}/image`, {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('userToken')}`,
                 }

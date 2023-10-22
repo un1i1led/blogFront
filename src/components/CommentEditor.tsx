@@ -26,7 +26,7 @@ const CommentEditor = (props: CommentProps) => {
     const submitComment = async () => {
         const formData = { comment }
 
-        await fetch(`http://localhost:3000/posts/${props.postId}/comment`, {
+        await fetch(`https://delicate-leaf-1408.fly.dev/posts/${props.postId}/comment`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('userToken')}`,

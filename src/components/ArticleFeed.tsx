@@ -41,13 +41,13 @@ const ArticleFeed = () => {
         const newPosts: Post[] = [];
 
         if (category._id == '0') {
-            await fetch(`http://localhost:3000/posts?page=${postPage}&limit=3`)
+            await fetch(`https://delicate-leaf-1408.fly.dev/posts?page=${postPage}&limit=3`)
                 .then((res) => res.json())
                 .then((res) => {
                     res.results.map((data: Post) => newPosts.push(data));
                 })
         } else {
-            await fetch(`http://localhost:3000/posts/fromtag/${category.name_lowered}?page=${postPage}&limit=3`)
+            await fetch(`https://delicate-leaf-1408.fly.dev/posts/fromtag/${category.name_lowered}?page=${postPage}&limit=3`)
                 .then((res) => res.json())
                 .then((res) => {
                     res.results.map((data: Post) => newPosts.push(data));
@@ -66,7 +66,7 @@ const ArticleFeed = () => {
         async function fetchCategories() {
             const newCategories: Category[] = []
 
-            await fetch('http://localhost:3000/tagslider')
+            await fetch('https://delicate-leaf-1408.fly.dev/tagslider')
                 .then(res => res.json())
                 .then(res => {
                     res.tags.map((data: Category) => newCategories.push(data));
@@ -78,7 +78,7 @@ const ArticleFeed = () => {
         async function fetchAllPosts() {
             const newPosts: Post[] = []
 
-            await fetch(`http://localhost:3000/posts?page=${postPage}&limit=3`)
+            await fetch(`https://delicate-leaf-1408.fly.dev/posts?page=${postPage}&limit=3`)
                 .then(res => res.json())
                 .then(res => {
                     res.results.map((data: Post) => newPosts.push(data));
